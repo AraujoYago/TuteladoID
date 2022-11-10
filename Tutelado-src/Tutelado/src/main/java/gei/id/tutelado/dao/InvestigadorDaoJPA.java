@@ -134,13 +134,13 @@ public class InvestigadorDaoJPA implements InvestigadorDao {
 				if (ex2 instanceof LazyInitializationException)
 
 				{
-					/* OPCION DE IMPLEMENTACION 1 (comentada): Cargar a propiedade "manualmente" cunha consulta, 
-					 *  e actualizar tamen "manualmente" o valor da propiedade  */  
-					//List<Publicacion> entradas = (List<Publicacion>) entityManager.createQuery("From Publicacion l where l.Investigador=:Investigador order by dataHora").setParameter("Investigador",investigador).getResultList();
-					//investigador.setPublicaciones (entradas);
+					/* OPCION DE IMPLEMENTACION 1 (comentada): Cargar la propiedad "manualmente" con una consulta, 
+					 *  y actualizar tambien "manualmente" el valor de la propiedad  */  
+					//List<Publicacion> publicaciones = (List<Publicacion>) entityManager.createQuery("From Publicacion l where l.Investigador=:Investigador order by fecha").setParameter("Investigador",investigador).getResultList();
+					//investigador.setPublicaciones (publicaciones);
 
-					/* OPCION DE IMPLEMENTACIÓN 2: Volver a ligar o obxecto Investigador a un novo CP, 
-					 * e acceder á propiedade nese momento, para que Hibernate a cargue.*/
+					/* OPCION DE IMPLEMENTACIÓN 2: Volver a ligar el objecto Investigador a un nuevo CP, 
+					 * y acceder a la propiedad en ese momento, para que Hibernate la cargue.*/
 					investigador = em.merge(investigador);
 					investigador.getPublicaciones().size();
 

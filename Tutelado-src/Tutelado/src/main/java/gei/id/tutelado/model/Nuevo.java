@@ -6,13 +6,13 @@ import javax.persistence.*;
 public class Nuevo extends Proyecto {
 
     @Column(nullable = false, unique = false)
-    private Float presupuesto;
+    private float presupuesto;
     
-    public Float getPresupuesto() {
+    public float getPresupuesto() {
 		return presupuesto;
 	}
 
-	public void setPresupuesto(Float presupuesto) {
+	public void setPresupuesto(float presupuesto) {
 		this.presupuesto = presupuesto;
 	} 
 

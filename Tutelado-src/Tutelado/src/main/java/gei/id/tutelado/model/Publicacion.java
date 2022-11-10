@@ -3,8 +3,8 @@ package gei.id.tutelado.model;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@TableGenerator(name="xeradorIdsPublicaciones", table="taboa_ids",
-pkColumnName="nome_id", pkColumnValue="idPublicacion",
+@TableGenerator(name="generadorIdsPublicaciones", table="tabla_ids",
+pkColumnName="nombre_id", pkColumnValue="idPublicacion",
 valueColumnName="ultimo_valor_id",
 initialValue=0, allocationSize=1)
 
@@ -14,17 +14,20 @@ initialValue=0, allocationSize=1)
 	@NamedQuery (name="Publicacion.recuperaTodasInvestigador",
 	 			 query="SELECT p FROM Publicacion p JOIN p.investigador i WHERE i=:i ORDER BY p.fecha DESC"),
 	@NamedQuery (name="Publicacion.recuperaTodas",
-	 			 query="SELECT p FROM Publicacion p")
+	 			 query="SELECT p FROM Publicacion p"),
+	@NamedQuery (name="Publicacion.recuperaNumeroPublicacionesRevista", 
+				 query="SELECT pu.revista AS revista, count(*) AS publicaciones FROM Publicacion pu WHERE pu.revista=:revista"
+						  + " GROUP BY pu.revista")
 })
 
 @Entity
 public class Publicacion implements Comparable<Publicacion> {
     @Id
-    @GeneratedValue(generator="xeradorIdsPublicaciones")
+    @GeneratedValue(generator="generadorIdsPublicaciones")
     private Long id;
 
     @Column(unique = true, nullable = false)
-    private String nome;
+    private String nombre;
 
     @Column(unique=false, nullable = false)
     private String revista;
@@ -40,8 +43,8 @@ public class Publicacion implements Comparable<Publicacion> {
 		return id;
 	}
 
-	public String getnome() {
-		return nome;
+	public String getNombre() {
+		return nombre;
 	}
 
 	public String getRevista() {
@@ -60,8 +63,8 @@ public class Publicacion implements Comparable<Publicacion> {
 		this.id = id;
 	}
 
-	public void setnome(String nome) {
-		this.nome = nome;
+	public void setNombre(String nome) {
+		this.nombre = nome;
 	}
 
 	public void setRevista(String revista) {
@@ -80,7 +83,7 @@ public class Publicacion implements Comparable<Publicacion> {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
 		return result;
 	}
 
@@ -93,17 +96,17 @@ public class Publicacion implements Comparable<Publicacion> {
 		if (getClass() != obj.getClass())
 			return false;
 		Publicacion other = (Publicacion) obj;
-		if (nome == null) {
-			if (other.nome != null)
+		if (nombre == null) {
+			if (other.nombre != null)
 				return false;
-		} else if (!nome.equals(other.nome))
+		} else if (!nombre.equals(other.nombre))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Publicacion [id=" + id + ", nome=" + nome + ", revista=" + revista + ", fecha=" + fecha + "]";
+		return "Publicacion [id=" + id + ", nome=" + nombre + ", revista=" + revista + ", fecha=" + fecha + "]";
 	}
 
 	@Override

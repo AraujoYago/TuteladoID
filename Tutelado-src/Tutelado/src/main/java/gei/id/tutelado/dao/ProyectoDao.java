@@ -8,13 +8,13 @@ public interface ProyectoDao {
     
 	void setup (Configuracion config);
 	
-	// OPERACIONS CRUD BASICAS
+	// OPERACIONES CRUD BASICAS
 	Proyecto almacena (Proyecto pr);
 	Proyecto modifica (Proyecto pr);
 	void elimina (Proyecto pr);
 	Proyecto recuperaPorNombre (String nombre);
 	
-	//QUERIES ADICIONAIS
+	//QUERIES ADICIONALESS
 	List<Proyecto> recuperaTodos();
 
 }

@@ -12,16 +12,16 @@ public interface InvestigadorDao {
     	
 	void setup (Configuracion config);
 	
-	// OPERACIONS CRUD BASICAS
+	// OPERACIONESS CRUD BASICAS
 	Investigador almacena (Investigador investigador);
 	Investigador modifica (Investigador investigador);
 	void elimina (Investigador investigador);	
 	Investigador recuperaPorDni (String dni);
 	
-	// OPERACIONS POR ATRIBUTOS LAZY
+	// OPERACIONES POR ATRIBUTOS LAZY
 	Investigador restauraPublicaciones (Investigador investigador);   
 	
-	// QUERIES ADICIONAIS
+	// QUERIES ADICIONALES
 	List<Investigador> recuperaTodos();
 	List<Investigador> recuperaTodosProyecto(Proyecto pr);
 	List<Publicacion> recuperaPublicacionesInvestigadorPorDni(String dni); // INNER JOIN

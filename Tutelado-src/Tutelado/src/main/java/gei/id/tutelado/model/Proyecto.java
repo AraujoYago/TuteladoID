@@ -6,18 +6,16 @@ import java.util.TreeSet;
 
 import javax.persistence.*;
 
-@TableGenerator(name="xeradorIdsProyectos", table="taboa_ids",
-pkColumnName="nome_id", pkColumnValue="idProyecto",
+@TableGenerator(name="generadorIdsProyectos", table="tabla_ids",
+pkColumnName="nombre_id", pkColumnValue="idProyecto",
 valueColumnName="ultimo_valor_id",
 initialValue=0, allocationSize=1)
 
 @NamedQueries ({
-	@NamedQuery (name="Publicacion.recuperaPorNombre",
-				 query="SELECT p FROM Publicacion p where p.nombre=:nombre"),
-	@NamedQuery (name="Publicacion.recuperaTodasInvestigador",
-	 			 query="SELECT p FROM Publicacion p JOIN p.investigador i WHERE i=:i ORDER BY p.fecha DESC"),
-	@NamedQuery (name="Publicacion.recuperaTodas",
-	 			 query="SELECT p FROM Publicacion p")
+	@NamedQuery (name="Proyecto.recuperaPorNombre",
+				 query="SELECT pr FROM Proyecto pr where pr.nombre=:nombre"),
+	@NamedQuery (name="Proyecto.recuperaTodos",
+	 			 query="SELECT pr FROM Proyecto pr")
 })
 
 @Entity
@@ -25,11 +23,11 @@ initialValue=0, allocationSize=1)
 public abstract class Proyecto {
 
 	@Id
-    @GeneratedValue(generator="xeradorIdsProyectos")
+    @GeneratedValue(generator="generadorIdsProyectos")
     private Long id;
 
     @Column(unique = true, nullable = false)
-    private String nome;
+    private String nombre;
 
     @Column(unique=false, nullable = false)
     private LocalDateTime fechaInicio;
@@ -37,16 +35,16 @@ public abstract class Proyecto {
     @Column(unique=false, nullable = true)
     private LocalDateTime fechaFin;
 
-    @OneToMany (mappedBy="proyecto", fetch=FetchType.LAZY, cascade={CascadeType.PERSIST, CascadeType.REMOVE} )
-    @OrderBy("fechaInicio ASC")
+    @OneToMany (mappedBy="proyecto", fetch=FetchType.LAZY, cascade= {})
+    @OrderBy("apellidos ASC")
     private SortedSet<Investigador> investigadores = new TreeSet<Investigador>();
     
     public Long getId() {
 		return id;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getNombre() {
+		return nombre;
 	}
 
 	public LocalDateTime getFechaInicio() {
@@ -65,8 +63,8 @@ public abstract class Proyecto {
 		this.id = id;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setNombre(String nome) {
+		this.nombre = nome;
 	}
 
 	public void setFechaInicio(LocalDateTime fechaInicio) {
@@ -81,11 +79,11 @@ public abstract class Proyecto {
 		this.investigadores = investigadores;
 	}
 	
-	// Metodo de conveniencia para asegurarnos de que actualizamos os dous extremos da asociación ao mesmo tempo
-	public void engadirInvestigador(Investigador investigador) {
+	// Metodo de conveniencia para asegurarnos de que actualizamos los dos extremos de la asociación al mismo tiempo
+	public void addInvestigador(Investigador investigador) {
 		if (investigador.getProyecto() != null) throw new RuntimeException ("");
 		investigador.setProyecto(this);
-		// É un sorted set, engadimos sempre por orde de data (ascendente)
+		// Es un sorted set, añadimos siempre por el orden de fecha (ascendiente)
 		this.investigadores.add(investigador);
 	}
 
@@ -93,7 +91,7 @@ public abstract class Proyecto {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
 		return result;
 	}
 
@@ -106,17 +104,17 @@ public abstract class Proyecto {
 		if (getClass() != obj.getClass())
 			return false;
 		Proyecto other = (Proyecto) obj;
-		if (nome == null) {
-			if (other.nome != null)
+		if (nombre == null) {
+			if (other.nombre != null)
 				return false;
-		} else if (!nome.equals(other.nome))
+		} else if (!nombre.equals(other.nombre))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Proyecto [id=" + id + ", nome=" + nome + ", fechaInicio=" + fechaInicio +  ", fechaFin=" + fechaFin + "]";
+		return "Proyecto [id=" + id + ", nome=" + nombre + ", fechaInicio=" + fechaInicio +  ", fechaFin=" + fechaFin + "]";
 	}
 
 }
