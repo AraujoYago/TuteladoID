@@ -70,7 +70,7 @@ public class P01_Usuarios {
 	@Before
 	public void setUp() throws Exception {		
 		log.info("");	
-		log.info("Limpando BD --------------------------------------------------------------------------------------------");
+		log.info("Limpiando BD --------------------------------------------------------------------------------------------");
 		produtorDatos.limpaBD();
 	}
 
@@ -83,14 +83,14 @@ public class P01_Usuarios {
     	Usuario u;
     	
     	log.info("");	
-		log.info("Configurando situación de partida do test -----------------------------------------------------------------------");
+		log.info("Configurando situación de partida del test -----------------------------------------------------------------------");
 
 		produtorDatos.creaUsuariosSoltos();
     	produtorDatos.gravaUsuarios();
     	
     	log.info("");	
-		log.info("Inicio do test --------------------------------------------------------------------------------------------------");
-    	log.info("Obxectivo: Proba de recuperación desde a BD de usuario (sen entradas asociadas) por nif\n"   
+		log.info("Inicio del test --------------------------------------------------------------------------------------------------");
+    	log.info("Objetivo: Prueba de recuperación desde la BD de usuario (sin entradas asociadas) por nif\n"   
     			+ "\t\t\t\t Casos contemplados:\n"
     			+ "\t\t\t\t a) Recuperación por nif existente\n"
     			+ "\t\t\t\t b) Recuperacion por nif inexistente\n");
@@ -117,13 +117,13 @@ public class P01_Usuarios {
     public void test02_Alta() {
 
     	log.info("");	
-		log.info("Configurando situación de partida do test -----------------------------------------------------------------------");
+		log.info("Configurando situación de partida del test -----------------------------------------------------------------------");
   
 		produtorDatos.creaUsuariosSoltos();
     	
     	log.info("");	
-		log.info("Inicio do test --------------------------------------------------------------------------------------------------");
-    	log.info("Obxectivo: Proba de gravación na BD de novo usuario (sen entradas de log asociadas)\n");
+		log.info("Inicio del test --------------------------------------------------------------------------------------------------");
+    	log.info("Objetivo: Prueba de grabación en la BD de nuevo usuario (sin entradas de log asociadas)\n");
     	
     	// Situación de partida:
     	// u0 transitorio    	
@@ -137,15 +137,15 @@ public class P01_Usuarios {
     public void test03_Eliminacion() {
     	
     	log.info("");	
-		log.info("Configurando situación de partida do test -----------------------------------------------------------------------");
+		log.info("Configurando situación de partida del test -----------------------------------------------------------------------");
 
 		produtorDatos.creaUsuariosSoltos();
     	produtorDatos.gravaUsuarios();
 
     	
     	log.info("");	
-		log.info("Inicio do test --------------------------------------------------------------------------------------------------");
-    	log.info("Obxectivo: Proba de eliminación da BD de usuario sen entradas asociadas\n");   
+		log.info("Inicio del test --------------------------------------------------------------------------------------------------");
+    	log.info("Objetivo: Prueba de eliminación de la BD de usuario sin entradas asociadas\n");   
  
     	// Situación de partida:
     	// u0 desligado  
@@ -162,19 +162,19 @@ public class P01_Usuarios {
     	String novoNome;
     	
     	log.info("");	
-		log.info("Configurando situación de partida do test -----------------------------------------------------------------------");
+		log.info("Configurando situación de partida del test -----------------------------------------------------------------------");
 
 		produtorDatos.creaUsuariosSoltos();
     	produtorDatos.gravaUsuarios();
 
     	log.info("");	
-		log.info("Inicio do test --------------------------------------------------------------------------------------------------");
-    	log.info("Obxectivo: Proba de modificación da información básica dun usuario sen entradas de log\n");
+		log.info("Inicio del test --------------------------------------------------------------------------------------------------");
+    	log.info("Objetivo: Prueba de modificación de la información básica de un usuario sin entradas de log\n");
 
     	// Situación de partida:
     	// u0 desligado  
 
-		novoNome = new String ("Nome novo");
+		novoNome = new String ("Nombre nuevo");
 
 		u1 = usuDao.recuperaPorNif(produtorDatos.u0.getNif());
 		Assert.assertNotEquals(novoNome, u1.getNome());
@@ -193,22 +193,22 @@ public class P01_Usuarios {
     	Boolean excepcion;
     	
     	log.info("");	
-		log.info("Configurando situación de partida do test -----------------------------------------------------------------------");
+		log.info("Configurando situación de partida del test -----------------------------------------------------------------------");
 
 		produtorDatos.creaUsuariosSoltos();
     	usuDao.almacena(produtorDatos.u0);
     	
     	log.info("");	
-		log.info("Inicio do test --------------------------------------------------------------------------------------------------");
-    	log.info("Obxectivo: Proba de violación de restricións not null e unique\n"   
+		log.info("Inicio del test --------------------------------------------------------------------------------------------------");
+    	log.info("Objetivo: Prueba de violación de restricións not null y unique\n"   
     			+ "\t\t\t\t Casos contemplados:\n"
-    			+ "\t\t\t\t a) Gravación de usuario con nif duplicado\n"
-    			+ "\t\t\t\t b) Gravación de usuario con nif nulo\n");
+    			+ "\t\t\t\t a) Grabación de usuario con nif duplicado\n"
+    			+ "\t\t\t\t b) Grabación de usuario con nif nulo\n");
 
     	// Situación de partida:
     	// u0 desligado, u1 transitorio
     	
-		log.info("Probando gravacion de usuario con Nif duplicado -----------------------------------------------");
+		log.info("Probando grabación de usuario con Nif duplicado -----------------------------------------------");
     	produtorDatos.u1.setNif(produtorDatos.u0.getNif());
     	try {
         	usuDao.almacena(produtorDatos.u1);
@@ -221,7 +221,7 @@ public class P01_Usuarios {
     	
     	// Nif nulo
     	log.info("");	
-		log.info("Probando gravacion de usuario con Nif nulo ----------------------------------------------------");
+		log.info("Probando grabación de usuario con Nif nulo ----------------------------------------------------");
     	produtorDatos.u1.setNif(null);
     	try {
         	usuDao.almacena(produtorDatos.u1);

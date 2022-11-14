@@ -168,14 +168,14 @@ public class P02_Usuarios_Entradas {
     public void test03_Eliminacion() {
     	
     	log.info("");	
-		log.info("Configurando situación de partida do test -----------------------------------------------------------------------");
+		log.info("Configurando situación de partida del test -----------------------------------------------------------------------");
 
     	produtorDatos.creaUsuariosConEntradasLog();
     	produtorDatos.gravaUsuarios();
 
     	log.info("");	
 		log.info("Inicio do test --------------------------------------------------------------------------------------------------");
-    	log.info("Obxectivo: Proba de eliminación de entrada de log solta (asignada a usuario)\n");
+    	log.info("Objetivo: Prueba de eliminación de entrada de log suelta (asignada a usuario)\n");
     	
     	// Situación de partida:
     	// e1A desligado
@@ -193,20 +193,20 @@ public class P02_Usuarios_Entradas {
     	String novaDescricion;
     	
     	log.info("");	
-		log.info("Configurando situación de partida do test -----------------------------------------------------------------------");
+		log.info("Configurando situación de partida del test -----------------------------------------------------------------------");
   
 		produtorDatos.creaUsuariosConEntradasLog();
     	produtorDatos.gravaUsuarios();
 
     	log.info("");	
-		log.info("Inicio do test --------------------------------------------------------------------------------------------------");
-    	log.info("Obxectivo: Proba de modificación da información dunha entrada de log solta\n");
+		log.info("Inicio del test --------------------------------------------------------------------------------------------------");
+    	log.info("Objetivo: Prueba de modificación da información dunha entrada de log suelta\n");
  
     	
     	// Situación de partida:
     	// e1A desligado
     	
-		novaDescricion = new String ("Descricion nova");
+		novaDescricion = new String ("Descripcion nueva");
 
 		e1 = logDao.recuperaPorCodigo(produtorDatos.e1A.getCodigo());
 
@@ -227,7 +227,7 @@ public class P02_Usuarios_Entradas {
 
    	    	
     	log.info("");	
-		log.info("Configurando situación de partida do test -----------------------------------------------------------------------");
+		log.info("Configurando situación de partida del test -----------------------------------------------------------------------");
 
 		produtorDatos.creaUsuariosSoltos();
     	produtorDatos.creaEntradasLogSoltas();
@@ -236,8 +236,8 @@ public class P02_Usuarios_Entradas {
 
 
     	log.info("");	
-		log.info("Inicio do test --------------------------------------------------------------------------------------------------");
-    	log.info("Obxectivo: Proba da gravación de novo usuario con entradas (novas) de log asociadas\n");   
+		log.info("Inicio del test --------------------------------------------------------------------------------------------------");
+    	log.info("Objetivo: Proba da grabación de nuevo usuario con entradas (nuevas) de log asociadas\n");   
 
     	// Situación de partida:
     	// u1, e1A, e1B transitorios
@@ -246,7 +246,7 @@ public class P02_Usuarios_Entradas {
     	Assert.assertNull(produtorDatos.e1A.getId());
     	Assert.assertNull(produtorDatos.e1B.getId());
     	
-		log.info("Gravando na BD usuario con entradas de log ----------------------------------------------------------------------");
+		log.info("Grabando na BD usuario con entradas de log ----------------------------------------------------------------------");
 
     	// Aqui o persist sobre u1 debe propagarse a e1A e e1B
 		usuDao.almacena(produtorDatos.u1);
@@ -260,14 +260,14 @@ public class P02_Usuarios_Entradas {
     public void test05_Propagacion_Remove() {
     	
     	log.info("");	
-		log.info("Configurando situación de partida do test -----------------------------------------------------------------------");
+		log.info("Configurando situación de partida del test -----------------------------------------------------------------------");
    	
     	produtorDatos.creaUsuariosConEntradasLog();
     	produtorDatos.gravaUsuarios();
 
     	log.info("");	
-		log.info("Inicio do test --------------------------------------------------------------------------------------------------");
-    	log.info("Obxectivo: Proba de eliminación de de usuario con entradas de log asociadas\n");
+		log.info("Inicio del test --------------------------------------------------------------------------------------------------");
+    	log.info("Objetivo: Prueba de eliminación de de usuario con entradas de log asociadas\n");
 
     	// Situación de partida:
     	// u1, e1A, e1B desligados
@@ -292,18 +292,18 @@ public class P02_Usuarios_Entradas {
     	Boolean excepcion;
     	
     	log.info("");	
-		log.info("Configurando situación de partida do test -----------------------------------------------------------------------");
+		log.info("Configurando situación de partida del test -----------------------------------------------------------------------");
 
 		produtorDatos.creaUsuariosConEntradasLog();
     	produtorDatos.gravaUsuarios();
 
-		log.info("Inicio do test --------------------------------------------------------------------------------------------------");
-    	log.info("Obxectivo: Proba da recuperación de propiedades EAGER\n");   
+		log.info("Inicio del test --------------------------------------------------------------------------------------------------");
+    	log.info("Objetivo: Prueba da recuperación de propiedades EAGER\n");   
 
     	// Situación de partida:
     	// u1, e1A, e1B desligados
     	
-		log.info("Probando (que non hai excepcion tras) acceso inicial a propiedade EAGER fora de sesion ----------------------------------------");
+		log.info("Probando (que non hai excepcion tras) acceso inicial a la propiedad EAGER fuera de sesion ----------------------------------------");
     	
     	e = logDao.recuperaPorCodigo(produtorDatos.e1A.getCodigo());  
 		log.info("Acceso a usuario de entrada de log");
@@ -325,17 +325,17 @@ public class P02_Usuarios_Entradas {
     	Boolean excepcion;
     	
     	log.info("");	
-		log.info("Configurando situación de partida do test -----------------------------------------------------------------------");
+		log.info("Configurando situación de partida del test -----------------------------------------------------------------------");
 
 		produtorDatos.creaUsuariosConEntradasLog();
     	produtorDatos.gravaUsuarios();
 
-		log.info("Inicio do test --------------------------------------------------------------------------------------------------");
-    	log.info("Obxectivo: Proba da recuperación de propiedades LAZY\n"   
+		log.info("Inicio del test --------------------------------------------------------------------------------------------------");
+    	log.info("Objetivo: Prueba da recuperación de propiedades LAZY\n"   
 		+ "\t\t\t\t Casos contemplados:\n"
 		+ "\t\t\t\t a) Recuperación de usuario con colección (LAZY) de entradas de log \n"
 		+ "\t\t\t\t b) Carga forzada de colección LAZY da dita coleccion\n"     	
-		+ "\t\t\t\t c) Recuperacion de entrada de log solta con referencia (EAGER) a usuario\n");     	
+		+ "\t\t\t\t c) Recuperacion de entrada de log suelta con referencia (EAGER) a usuario\n");     	
 
     	// Situación de partida:
     	// u1, e1A, e1B desligados
@@ -378,7 +378,7 @@ public class P02_Usuarios_Entradas {
     	Boolean excepcion;
     	
     	log.info("");	
-		log.info("Configurando situación de partida do test -----------------------------------------------------------------------");
+		log.info("Configurando situación de partida del test -----------------------------------------------------------------------");
 
 		produtorDatos.creaUsuariosSoltos();
 		produtorDatos.gravaUsuarios();
@@ -387,18 +387,18 @@ public class P02_Usuarios_Entradas {
 		logDao.almacena(produtorDatos.e1A);
 		
     	log.info("");	
-		log.info("Inicio do test --------------------------------------------------------------------------------------------------");
-    	log.info("Obxectivo: Proba de violacion de restricions not null e unique\n"   
+		log.info("Inicio del test --------------------------------------------------------------------------------------------------");
+    	log.info("Obxectivo: Prueba de violacion de restriciones not null y unique\n"   
     			+ "\t\t\t\t Casos contemplados:\n"
-    			+ "\t\t\t\t a) Gravación de entrada con usuario nulo\n"
-    			+ "\t\t\t\t b) Gravación de entrada con codigo nulo\n"
-    			+ "\t\t\t\t c) Gravación de entrada con codigo duplicado\n");
+    			+ "\t\t\t\t a) Grabación de entrada con usuario nulo\n"
+    			+ "\t\t\t\t b) Grabación de entrada con codigo nulo\n"
+    			+ "\t\t\t\t c) Grabación de entrada con codigo duplicado\n");
 
     	// Situación de partida:
     	// u0, u1 desligados
     	// e1A desligado, e1B transitorio (e sen usuario asociado)
     	
-		log.info("Probando gravacion de entrada con usuario nulo ------------------------------------------------------------------");
+		log.info("Probando grabación de entrada con usuario nulo ------------------------------------------------------------------");
     	try {
     		logDao.almacena(produtorDatos.e1B);
         	excepcion=false;
@@ -412,7 +412,7 @@ public class P02_Usuarios_Entradas {
 		produtorDatos.u1.engadirEntradaLog(produtorDatos.e1B);
     	    	
     	log.info("");	
-		log.info("Probando gravacion de entrada con codigo nulo -------------------------------------------------------------------");
+		log.info("Probando grabación de entrada con codigo nulo -------------------------------------------------------------------");
 		produtorDatos.e1B.setCodigo(null);
     	try {
         	logDao.almacena(produtorDatos.e1B);
@@ -424,7 +424,7 @@ public class P02_Usuarios_Entradas {
     	Assert.assertTrue(excepcion);
 
     	log.info("");	
-		log.info("Probando gravacion de entrada con codigo duplicado --------------------------------------------------------------");
+		log.info("Probando grabación de entrada con codigo duplicado --------------------------------------------------------------");
 		produtorDatos.e1B.setCodigo(produtorDatos.e1A.getCodigo());
     	try {
         	logDao.almacena(produtorDatos.e1B);

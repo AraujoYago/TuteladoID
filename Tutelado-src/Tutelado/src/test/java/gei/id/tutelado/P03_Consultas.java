@@ -80,7 +80,7 @@ public class P03_Consultas {
 	@Before
 	public void setUp() throws Exception {		
 		log.info("");	
-		log.info("Limpando BD -----------------------------------------------------------------------------------------------------");
+		log.info("Limpiando BD -----------------------------------------------------------------------------------------------------");
 		produtorDatos.limpaBD();
 	}
 
@@ -95,14 +95,14 @@ public class P03_Consultas {
     	List<Usuario> listaU;    	
 
     	log.info("");	
-		log.info("Configurando situación de partida do test -----------------------------------------------------------------------");
+		log.info("Configurando situación de partida del test -----------------------------------------------------------------------");
 
 		produtorDatos.creaUsuariosConEntradasLog();
     	produtorDatos.gravaUsuarios();
 
     	log.info("");	
-		log.info("Inicio do test --------------------------------------------------------------------------------------------------");
-    	log.info("Obxectivo: Proba da consulta Usuario.recuperaTodos\n");   
+		log.info("Inicio del test --------------------------------------------------------------------------------------------------");
+    	log.info("Objetivo: Prueba da consulta Usuario.recuperaTodos\n");   
 
     	// Situación de partida:
     	// u1, e1A, e1B desligados
@@ -121,14 +121,14 @@ public class P03_Consultas {
     	List<EntradaLog> listaE;
     	
     	log.info("");	
-		log.info("Configurando situación de partida do test -----------------------------------------------------------------------");
+		log.info("Configurando situación de partida del test -----------------------------------------------------------------------");
 
 		produtorDatos.creaUsuariosConEntradasLog();
     	produtorDatos.gravaUsuarios();
 
     	log.info("");	
 		log.info("Inicio do test --------------------------------------------------------------------------------------------------");
-    	log.info("Obxectivo: Proba da consulta EntradaLog.recuperaTodasUsuario\n");   
+    	log.info("Objetivo: Prueba de la consulta EntradaLog.recuperaTodasUsuario\n");   
 
     	// Situación de partida:
     	// u1, e1A, e1B desligados
