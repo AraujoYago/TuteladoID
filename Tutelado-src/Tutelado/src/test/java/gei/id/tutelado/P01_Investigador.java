@@ -134,7 +134,7 @@ public class P01_Investigador {
     	invDao.almacena(produtorDatos.i0);    	
     	Assert.assertNotNull(produtorDatos.i0.getId());
 
-        // i1 transitorio    (?)
+        // i1 transitorio   (?)
         Assert.assertNull(produtorDatos.i1.getId());
     	invDao.almacena(produtorDatos.i1);    	
     	Assert.assertNotNull(produtorDatos.i1.getId());	
@@ -165,8 +165,8 @@ public class P01_Investigador {
     @Test 
     public void test04_Modificacion() {
     	
-    	Investigador u1, u2;
-    	String novoNome;
+    	Investigador i1, i2;
+    	String nuevoNombre;
     	
     	log.info("");	
 		log.info("Configurando situación de partida del test -----------------------------------------------------------------------");
@@ -181,16 +181,16 @@ public class P01_Investigador {
     	// Situación de partida:
     	// u0 desligado  
 
-		novoNome = new String ("Nombre nuevo");
+		nuevoNombre = new String ("Nombre nuevo");
 
-		u1 = invDao.recuperaPorDni(produtorDatos.i0.getDni());
-		Assert.assertNotEquals(novoNome, u1.getNombre());
-    	u1.setNombre(novoNome);
+		i1 = invDao.recuperaPorDni(produtorDatos.i0.getDni());
+		Assert.assertNotEquals(nuevoNombre, i1.getNombre());
+    	i1.setNombre(nuevoNombre);
 
-    	invDao.modifica(u1);    	
+    	invDao.modifica(i1);    	
     	
-		u2 = invDao.recuperaPorDni(produtorDatos.i0.getDni());
-		Assert.assertEquals (novoNome, u2.getNombre());
+		i2 = invDao.recuperaPorDni(produtorDatos.i0.getDni());
+		Assert.assertEquals (nuevoNombre, i2.getNombre());
     } 	
 
     @Test
