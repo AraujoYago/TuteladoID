@@ -26,6 +26,9 @@ public class ProdutorDatosProba {
 	public Nuevo n0, n1;
 	
 	public Revision r0, r1;
+
+	public List<Nuevo> lN;
+	public List<Revision> lR;
 	
 	public void Setup (Configuracion config) {
 		this.emf=(EntityManagerFactory) config.get("EMF");
@@ -83,7 +86,11 @@ public class ProdutorDatosProba {
 		this.n1.setNombre("Nuevo2");
 		this.n1.setFechaInicio(LocalDateTime.of(2019,02,15,22,30));
 		this.n1.setFechaFin(null);
-		this.n1.setPresupuesto(2000f);       
+		this.n1.setPresupuesto(2000f);   
+		
+		this.lN = new ArrayList<Nuevo>();
+		this.lN.add(n0);
+		this.lN.add(n1);
 
 	}
 	
@@ -101,6 +108,9 @@ public class ProdutorDatosProba {
 		this.r1.setFechaFin(null);
 		this.r1.setMotivo("Motivo2 de la revisión del proyecto");        
 
+		this.lR = new ArrayList<Revision>();
+		this.lR.add(r0);
+		this.lR.add(r1);
 	}
 	
 	public void creaInvestigadoresConPublicaciones() {
@@ -153,7 +163,46 @@ public class ProdutorDatosProba {
 	}
 	
 	
-	
+	public void registrarProyectos() {
+		EntityManager em=null;
+
+		try {
+			em = emf.createEntityManager();
+			em.getTransaction().begin();
+			
+			if (this.lN != null) {
+				Iterator<Nuevo> itN = this.lN.iterator();
+				while (itN.hasNext()) {
+					Nuevo s = itN.next();
+					em.persist(s);
+				}
+			}
+			if (this.lR != null) {
+				Iterator<Revision> itR = this.lR.iterator();
+
+				while (itR.hasNext()) {
+					Revision s = itR.next();
+					em.persist(s);
+				}
+			}
+			em.getTransaction().commit();
+			em.close();
+
+		} catch (Exception e) {
+			if (em!=null && em.isOpen()) {
+				if (em.getTransaction().isActive()) em.getTransaction().rollback();
+				em.close();
+				throw (e);
+			}
+		} finally {
+			if (this.lN != null) this.lN.clear();
+			if (this.lR != null) this.lR.clear();
+		}
+
+	}
+
+
+
 	public void limpaBD () {
 		EntityManager em=null;
 		try {
