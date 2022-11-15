@@ -13,7 +13,6 @@ import gei.id.tutelado.model.*;
 
 public class ProdutorDatosProba {
 
-
 	// Crea un conjunto de objectos para utilizar en los casos de prueba
 	
 	private EntityManagerFactory emf=null;
@@ -27,8 +26,6 @@ public class ProdutorDatosProba {
 	public Nuevo n0, n1;
 	
 	public Revision r0, r1;
-	
-	
 	
 	public void Setup (Configuracion config) {
 		this.emf=(EntityManagerFactory) config.get("EMF");
@@ -156,8 +153,6 @@ public class ProdutorDatosProba {
 	}
 	
 	
-	// CREO QUE FALTARÍA HACER EL MÉTODO registrarProyectos() //
-	
 	
 	public void limpaBD () {
 		EntityManager em=null;
@@ -175,6 +170,7 @@ public class ProdutorDatosProba {
 			
 			em.createNativeQuery("UPDATE taboa_ids SET ultimo_valor_id=0 WHERE nome_id='idInvestigador'" ).executeUpdate();
 			em.createNativeQuery("UPDATE taboa_ids SET ultimo_valor_id=0 WHERE nome_id='idPublicacion'" ).executeUpdate();
+			em.createNativeQuery("UPDATE taboa_ids SET ultimo_valor_id=0 WHERE nome_id='idProyecto'" ).executeUpdate();
 
 			em.getTransaction().commit();
 			em.close();

@@ -9,8 +9,8 @@ valueColumnName="ultimo_valor_id",
 initialValue=0, allocationSize=1)
 
 @NamedQueries ({
-	@NamedQuery (name="Publicacion.recuperaPornome",
-				 query="SELECT p FROM Publicacion p where p.nome=:nome"),
+	@NamedQuery (name="Publicacion.recuperaPorNombre",
+				 query="SELECT p FROM Publicacion p where p.nombre=:nombre"),
 	@NamedQuery (name="Publicacion.recuperaTodasInvestigador",
 	 			 query="SELECT p FROM Publicacion p JOIN p.investigador i WHERE i=:i ORDER BY p.fecha DESC"),
 	@NamedQuery (name="Publicacion.recuperaTodas",

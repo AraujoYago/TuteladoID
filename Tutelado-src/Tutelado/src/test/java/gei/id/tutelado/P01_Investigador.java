@@ -23,8 +23,6 @@ import org.junit.runner.Description;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-
-
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class P01_Investigador {
 
@@ -79,6 +77,7 @@ public class P01_Investigador {
 	public void tearDown() throws Exception {
 	}
 
+	@Test
     public void test01_Recuperacion() {
     	
     	Investigador i;
@@ -194,7 +193,7 @@ public class P01_Investigador {
     } 	
 
     @Test
-    public void test09_Excepcions() {
+    public void test05_Excepcions() {
     	
     	Boolean excepcion;
     	

@@ -14,9 +14,12 @@
 	        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
 	 		<!-- Entity classes --> 
-	        <class>gei.id.tutelado.model.Usuario</class>
-	        <class>gei.id.tutelado.model.EntradaLog</class>
-       
+	        <class>gei.id.tutelado.model.Investigador</class>
+	        <class>gei.id.tutelado.model.Publicacion</class>
+	        <class>gei.id.tutelado.model.Proyecto</class>
+	        <class>gei.id.tutelado.model.Nuevo</class>
+	        <class>gei.id.tutelado.model.Revision</class>
+       	
 	        <exclude-unlisted-classes>true</exclude-unlisted-classes>
 
 	        <properties>
