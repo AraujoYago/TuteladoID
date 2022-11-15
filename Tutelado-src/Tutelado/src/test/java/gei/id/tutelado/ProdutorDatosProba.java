@@ -168,9 +168,9 @@ public class ProdutorDatosProba {
 			while (itPr.hasNext()) em.remove(itPr.next());
 
 			
-			em.createNativeQuery("UPDATE taboa_ids SET ultimo_valor_id=0 WHERE nome_id='idInvestigador'" ).executeUpdate();
-			em.createNativeQuery("UPDATE taboa_ids SET ultimo_valor_id=0 WHERE nome_id='idPublicacion'" ).executeUpdate();
-			em.createNativeQuery("UPDATE taboa_ids SET ultimo_valor_id=0 WHERE nome_id='idProyecto'" ).executeUpdate();
+			em.createNativeQuery("UPDATE tabla_ids SET ultimo_valor_id=0 WHERE nombre_id='idInvestigador'" ).executeUpdate();
+			em.createNativeQuery("UPDATE tabla_ids SET ultimo_valor_id=0 WHERE nombre_id='idPublicacion'" ).executeUpdate();
+			em.createNativeQuery("UPDATE tabla_ids SET ultimo_valor_id=0 WHERE nombre_id='idProyecto'" ).executeUpdate();
 
 			em.getTransaction().commit();
 			em.close();
