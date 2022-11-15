@@ -13,13 +13,21 @@
 	        <!-- Persistence provider -->
 	        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
+<<<<<<< HEAD
 	 		<!-- Entity classes --> 
+=======
+			<!-- Entity classes --> 
+>>>>>>> 972e75c24dc9796e2de256b03ee1760e767fdd78
 	        <class>gei.id.tutelado.model.Investigador</class>
 	        <class>gei.id.tutelado.model.Publicacion</class>
 	        <class>gei.id.tutelado.model.Proyecto</class>
 	        <class>gei.id.tutelado.model.Nuevo</class>
 	        <class>gei.id.tutelado.model.Revision</class>
+<<<<<<< HEAD
        	
+=======
+       
+>>>>>>> 972e75c24dc9796e2de256b03ee1760e767fdd78
 	        <exclude-unlisted-classes>true</exclude-unlisted-classes>
 
 	        <properties>
