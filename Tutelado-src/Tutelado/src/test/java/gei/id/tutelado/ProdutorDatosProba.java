@@ -58,12 +58,12 @@ public class ProdutorDatosProba {
 	
 	public void creaPublicacionesSueltas() {
 		
-		this.pu1A=new Publicacion();
+		this.pu1A = new Publicacion();
         this.pu1A.setNombre("pu001");
         this.pu1A.setRevista("revista1");
         this.pu1A.setFecha(LocalDateTime.of(2018,10,30,12,00));
 
-        this.pu1B=new Publicacion();
+        this.pu1B = new Publicacion();
         this.pu1B.setNombre("pu002");
         this.pu1B.setRevista("revista2");
         this.pu1B.setFecha(LocalDateTime.of(2019,02,15,22,30));
@@ -128,7 +128,7 @@ public class ProdutorDatosProba {
 		this.creaNuevosSueltos();
 		this.creaInvestigadoresSueltos();
 		
-        this.n1.addInvestigador(this.i1);
+        this.n1.addInvestigador(this.i0);
         this.n1.addInvestigador(this.i1);
 
 	}
@@ -165,7 +165,6 @@ public class ProdutorDatosProba {
 	
 	public void registrarProyectos() {
 		EntityManager em=null;
-
 		try {
 			em = emf.createEntityManager();
 			em.getTransaction().begin();
@@ -173,16 +172,15 @@ public class ProdutorDatosProba {
 			if (this.lN != null) {
 				Iterator<Nuevo> itN = this.lN.iterator();
 				while (itN.hasNext()) {
-					Nuevo s = itN.next();
-					em.persist(s);
+					Nuevo n = itN.next();
+					em.persist(n);
 				}
 			}
 			if (this.lR != null) {
 				Iterator<Revision> itR = this.lR.iterator();
-
 				while (itR.hasNext()) {
-					Revision s = itR.next();
-					em.persist(s);
+					Revision r = itR.next();
+					em.persist(r);
 				}
 			}
 			em.getTransaction().commit();
@@ -215,7 +213,6 @@ public class ProdutorDatosProba {
 			while (itPu.hasNext()) em.remove(itPu.next());
 			Iterator <Proyecto> itPr = em.createNamedQuery("Proyecto.recuperaTodos", Proyecto.class).getResultList().iterator();
 			while (itPr.hasNext()) em.remove(itPr.next());
-
 			
 			em.createNativeQuery("UPDATE tabla_ids SET ultimo_valor_id=0 WHERE nombre_id='idInvestigador'" ).executeUpdate();
 			em.createNativeQuery("UPDATE tabla_ids SET ultimo_valor_id=0 WHERE nombre_id='idPublicacion'" ).executeUpdate();

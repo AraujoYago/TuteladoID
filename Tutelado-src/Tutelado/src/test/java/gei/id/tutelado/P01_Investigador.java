@@ -154,7 +154,7 @@ public class P01_Investigador {
     	log.info("Objetivo: Prueba de eliminación de la BD de investigador sin publicaciones asociadas\n");   
  
     	// Situación de partida:
-    	// u0 desligado  
+    	// i0 desligado  
 
     	Assert.assertNotNull(invDao.recuperaPorDni(produtorDatos.i0.getDni()));
     	invDao.elimina(produtorDatos.i0);    	
@@ -178,7 +178,7 @@ public class P01_Investigador {
     	log.info("Objetivo: Prueba de modificación de la información básica de un investigador sin publicaciones\n");
 
     	// Situación de partida:
-    	// u0 desligado  
+    	// i0 desligado  
 
 		nuevoNombre = new String ("Nombre nuevo");
 
@@ -207,13 +207,13 @@ public class P01_Investigador {
 		log.info("Inicio del test --------------------------------------------------------------------------------------------------");
     	log.info("Objetivo: Prueba de violación de restricións not null y unique\n"   
     			+ "\t\t\t\t Casos contemplados:\n"
-    			+ "\t\t\t\t a) Grabación de usuario con dni duplicado\n"
-    			+ "\t\t\t\t b) Grabación de usuario con dni nulo\n");
+    			+ "\t\t\t\t a) Grabación de investigador con dni duplicado\n"
+    			+ "\t\t\t\t b) Grabación de investigador con dni nulo\n");
 
     	// Situación de partida:
-    	// u0 desligado, u1 transitorio
+    	// i0 desligado, i1 transitorio
     	
-		log.info("Probando grabación de usuario con Dni duplicado -----------------------------------------------");
+		log.info("Probando grabación de investigador con dni duplicado -----------------------------------------------");
     	produtorDatos.i1.setDni(produtorDatos.i0.getDni());
     	try {
         	invDao.almacena(produtorDatos.i1);
@@ -226,7 +226,7 @@ public class P01_Investigador {
     	
     	// Dni nulo
     	log.info("");	
-		log.info("Probando grabación de usuario con Dni nulo ----------------------------------------------------");
+		log.info("Probando grabación de investigador con dni nulo ----------------------------------------------------");
     	produtorDatos.i1.setDni(null);
     	try {
         	invDao.almacena(produtorDatos.i1);

@@ -2,13 +2,9 @@ package gei.id.tutelado;
 
 import gei.id.tutelado.configuracion.Configuracion;
 import gei.id.tutelado.configuracion.ConfiguracionJPA;
-import gei.id.tutelado.dao.InvestigadorDao;
-import gei.id.tutelado.dao.InvestigadorDaoJPA;
 import gei.id.tutelado.dao.ProyectoDao;
 import gei.id.tutelado.dao.ProyectoDaoJPA;
-import gei.id.tutelado.model.Investigador;
 import gei.id.tutelado.model.Nuevo;
-import gei.id.tutelado.model.Proyecto;
 import gei.id.tutelado.model.Revision;
 
 //import org.apache.log4j.Logger;
@@ -27,8 +23,6 @@ import org.junit.runner.Description;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class P02_Proyecto {
@@ -94,9 +88,9 @@ public class P02_Proyecto {
     	log.info("");
         log.info("Configurando situación de partida do test ----------------------------------------------------------------------");
         
-        // Crea p0, p1, pSinPruebas
+        // Crea n0, n1
         produtorDatos.creaNuevosSueltos();
-        // Crea s0, s1
+        // Crea r0, r1
         produtorDatos.creaRevisionesSueltos();
         // Rexistra creacións na bd
         produtorDatos.registrarProyectos();
@@ -112,25 +106,25 @@ public class P02_Proyecto {
     	log.info("Probando nombre existente (Nuevo)\n");
     	
     	// Situación de partida:
-    	// p0 desligado
-    	n = (Nuevo) proDao.recuperaPorNombre(produtorDatos.p0.getNombre());
-        Assert.assertEquals(produtorDatos.i0.getNombre(),       n.getNombre());
-    	Assert.assertEquals(produtorDatos.i0.getfechaInicio(),  n.getfechaInicio());
-    	Assert.assertEquals(produtorDatos.i0.getfechaFin(),     n.getApellidos());
-    	Assert.assertEquals(produtorDatos.i0.getPresupuesto(),  n.getPresupuesto());
+    	// n0 desligado
+    	n = (Nuevo) proDao.recuperaPorNombre(produtorDatos.n0.getNombre());
+        Assert.assertEquals(produtorDatos.n0.getNombre(),       n.getNombre());
+    	Assert.assertEquals(produtorDatos.n0.getFechaInicio(),  n.getFechaInicio());
+    	Assert.assertEquals(produtorDatos.n0.getFechaFin(),     n.getFechaFin());
+    	Assert.assertEquals(produtorDatos.n0.getPresupuesto(),  n.getPresupuesto(), 0.0f);
     	
     	log.info("Probando Nombre existente (Revision)\n");
 
     	// Situación de partida:
-    	// s0 desligado
-    	r = (Revision) proDao.recuperaPorDni(produtorDatos.s0.getDni());
-        Assert.assertEquals(produtorDatos.i0.getNombre(),       r.getNombre());
-    	Assert.assertEquals(produtorDatos.i0.getfechaInicio(),  r.getfechaInicio());
-    	Assert.assertEquals(produtorDatos.i0.getfechaFin(),     r.getApellidos());
-        Assert.assertEquals(produtorDatos.i0.getMotivo(),       r.getPresupuesto());
+    	// r0 desligado
+    	r = (Revision) proDao.recuperaPorNombre(produtorDatos.r0.getNombre());
+        Assert.assertEquals(produtorDatos.r0.getNombre(),       r.getNombre());
+    	Assert.assertEquals(produtorDatos.r0.getFechaInicio(),  r.getFechaInicio());
+    	Assert.assertEquals(produtorDatos.r0.getFechaFin(),     r.getFechaFin());
+        Assert.assertEquals(produtorDatos.r0.getMotivo(),       r.getMotivo());
 
     	log.info("Probando Nombre inexistente\n");
-    	inex = (Proyecto) proDao.recuperaPorNombre("noexiste");
+    	inex = (Nuevo) proDao.recuperaPorNombre("noexiste");
     	Assert.assertNull(inex);
     } 	
 
@@ -140,23 +134,46 @@ public class P02_Proyecto {
     	log.info("");	
 		log.info("Configurando situación de partida del test -----------------------------------------------------------------------");
   
-		produtorDatos.creaInvestigadoresSueltos();
+		// Crea n0, n1
+        produtorDatos.creaNuevosSueltos();
+        // Crea r0, r1
+        produtorDatos.creaRevisionesSueltos();
     	
     	log.info("");	
 		log.info("Inicio del test --------------------------------------------------------------------------------------------------");
-    	log.info("Objetivo: Prueba de grabación en la BD de nuevo investigador (sin publicaciones asociadas)\n");
+    	log.info("Objetivo: Prueba de grabación en la BD de un nuevos proyectos (nuevos y de revisión)\n");
     	
-    	// Situación de partida:
-    	// i0 transitorio    	
-    	
-    	Assert.assertNull(produtorDatos.i0.getId());
-    	invDao.almacena(produtorDatos.i0);    	
-    	Assert.assertNotNull(produtorDatos.i0.getId());
+    	log.info("Probando creación de Paciente 0\n");
 
-        // i1 transitorio   (?)
-        Assert.assertNull(produtorDatos.i1.getId());
-    	invDao.almacena(produtorDatos.i1);    	
-    	Assert.assertNotNull(produtorDatos.i1.getId());	
+        // Situación de partida:
+        // n0 transitorio
+        Assert.assertNull(produtorDatos.n0.getId());
+        proDao.almacena(produtorDatos.n0);
+        Assert.assertNotNull(produtorDatos.n0.getId());
+        
+        log.info("Probando creación de Paciente 1\n");
+
+        // Situación de partida:
+        // n1 transitorio
+        Assert.assertNull(produtorDatos.n1.getId());
+        proDao.almacena(produtorDatos.n1);
+        Assert.assertNotNull(produtorDatos.n1.getId());
+        
+        log.info("Probando creación de Sanitario 0\n");
+        
+        // Situación de partida:
+        // r0 transitorio
+        Assert.assertNull(produtorDatos.r0.getId());
+        proDao.almacena(produtorDatos.r0);
+        Assert.assertNotNull(produtorDatos.r0.getId());
+        
+        log.info("Probando creación de Sanitario 1\n");
+
+        // Situación de partida:
+        // r1 transitorio
+        Assert.assertNull(produtorDatos.r1.getId());
+        proDao.almacena(produtorDatos.r1);
+        Assert.assertNotNull(produtorDatos.r1.getId());
     }
 
     @Test 
@@ -165,78 +182,109 @@ public class P02_Proyecto {
     	log.info("");	
 		log.info("Configurando situación de partida del test -----------------------------------------------------------------------");
 
-		produtorDatos.creaInvestigadoresSueltos();
-    	produtorDatos.registrarInvestigadores();
+		// Crea n0, n1
+        produtorDatos.creaNuevosSueltos();
+        // Crea r0, r1
+        produtorDatos.creaRevisionesSueltos();
+        // Rexistra creacións na bd
+        produtorDatos.registrarProyectos();
 
     	
     	log.info("");	
 		log.info("Inicio del test --------------------------------------------------------------------------------------------------");
-    	log.info("Objetivo: Prueba de eliminación de la BD de investigador sin publicaciones asociadas\n");   
+    	log.info("Objetivo: Prueba de eliminación de la BD de proyectos\n");   
  
-    	// Situación de partida:
-    	// u0 desligado  
-
-    	Assert.assertNotNull(invDao.recuperaPorDni(produtorDatos.i0.getDni()));
-    	invDao.elimina(produtorDatos.i0);    	
-    	Assert.assertNull(invDao.recuperaPorDni(produtorDatos.i0.getDni()));
+    	log.info("Probando borrado proyecto nuevo\n");
+    	
+    	// Situación de partida
+    	// n0 desligado
+    	Assert.assertNotNull(proDao.recuperaPorNombre(produtorDatos.n0.getNombre()));
+    	proDao.elimina(produtorDatos.n0);
+    	Assert.assertNull(proDao.recuperaPorNombre(produtorDatos.n0.getNombre()));
+    	
+    	log.info("Probando borrado poryecto de revisión\n");
+    	
+    	// Situación de partida
+    	// r0 desligado
+    	Assert.assertNotNull(proDao.recuperaPorNombre(produtorDatos.r0.getNombre()));
+    	proDao.elimina(produtorDatos.r0);
+    	Assert.assertNull(proDao.recuperaPorNombre(produtorDatos.r0.getNombre()));
     } 	
 
     @Test 
     public void test04_Modificacion() {
     	
-    	Investigador i1, i2;
-    	String nuevoNombre;
+    	float presupuesto = 500.0f;
+    	String motivo = "Nuevo Motivo";
+    	Nuevo n, nMod;
+    	Revision r, rMod;
     	
     	log.info("");	
 		log.info("Configurando situación de partida del test -----------------------------------------------------------------------");
 
-		produtorDatos.creaInvestigadoresSueltos();
-    	produtorDatos.registrarInvestigadores();
+		// Crea n0, n1
+        produtorDatos.creaNuevosSueltos();
+        // Crea r0, r1
+        produtorDatos.creaRevisionesSueltos();
+        // Rexistra creacións na bd
+        produtorDatos.registrarProyectos();
 
     	log.info("");	
 		log.info("Inicio del test --------------------------------------------------------------------------------------------------");
-    	log.info("Objetivo: Prueba de modificación de la información básica de un investigador sin publicaciones\n");
+    	log.info("Objetivo: Prueba de modificación de la información básica de un proyecto (nuevo y de revisión)\n");
 
-    	// Situación de partida:
-    	// u0 desligado  
-
-		nuevoNombre = new String ("Nombre nuevo");
-
-		i1 = invDao.recuperaPorDni(produtorDatos.i0.getDni());
-		Assert.assertNotEquals(nuevoNombre, i1.getNombre());
-    	i1.setNombre(nuevoNombre);
-
-    	invDao.modifica(i1);    	
+    	log.info("Probando modificación de proyecto nuevo 0\n");
     	
-		i2 = invDao.recuperaPorDni(produtorDatos.i0.getDni());
-		Assert.assertEquals (nuevoNombre, i2.getNombre());
+    	// Situación de partida
+    	// n0 desligado
+    	n = (Nuevo) proDao.recuperaPorNombre(produtorDatos.n0.getNombre());
+    	Assert.assertNotEquals(presupuesto, n.getPresupuesto());
+    	n.setPresupuesto(presupuesto);
+    	proDao.modifica(n);
+    	nMod = (Nuevo) proDao.recuperaPorNombre(produtorDatos.n0.getNombre());
+    	Assert.assertEquals(presupuesto, nMod.getPresupuesto(), 0.0f);
+    	
+    	log.info("Probando modificación de proyecto de revisión 0\n");
+    	
+    	// Situación de partida
+    	// r0 desligado
+    	r = (Revision) proDao.recuperaPorNombre(produtorDatos.r0.getNombre());
+    	Assert.assertNotEquals(motivo, r.getMotivo());
+    	r.setMotivo(motivo);
+    	proDao.modifica(r);
+    	rMod = (Revision) proDao.recuperaPorNombre(produtorDatos.r0.getNombre());
+    	Assert.assertEquals(motivo, rMod.getMotivo());
+    	
     } 	
 
     @Test
-    public void test09_Excepcions() {
+    public void test05_Excepcions() {
     	
     	Boolean excepcion;
     	
     	log.info("");	
 		log.info("Configurando situación de partida del test -----------------------------------------------------------------------");
 
-		produtorDatos.creaInvestigadoresSueltos();
-    	invDao.almacena(produtorDatos.i0);
+		// Crea n0, n1
+        produtorDatos.creaNuevosSueltos();
+        
+    	proDao.almacena(produtorDatos.n0);
     	
     	log.info("");	
 		log.info("Inicio del test --------------------------------------------------------------------------------------------------");
     	log.info("Objetivo: Prueba de violación de restricións not null y unique\n"   
     			+ "\t\t\t\t Casos contemplados:\n"
-    			+ "\t\t\t\t a) Grabación de usuario con dni duplicado\n"
-    			+ "\t\t\t\t b) Grabación de usuario con dni nulo\n");
+    			+ "\t\t\t\t a) Grabación de proyecto con nombre duplicado\n"
+    			+ "\t\t\t\t b) Grabación de proyecto con nombre nulo\n");
 
     	// Situación de partida:
-    	// u0 desligado, u1 transitorio
+    	// n0 desligado, n1 transitorio
     	
-		log.info("Probando grabación de usuario con Dni duplicado -----------------------------------------------");
-    	produtorDatos.i1.setDni(produtorDatos.i0.getDni());
+		log.info("Probando grabación de proyecto con nombre duplicado -----------------------------------------------");
+		
+    	produtorDatos.n1.setNombre(produtorDatos.n0.getNombre());
     	try {
-        	invDao.almacena(produtorDatos.i1);
+        	proDao.almacena(produtorDatos.n1);
         	excepcion=false;
     	} catch (Exception ex) {
     		excepcion=true;
@@ -246,10 +294,10 @@ public class P02_Proyecto {
     	
     	// Dni nulo
     	log.info("");	
-		log.info("Probando grabación de usuario con Dni nulo ----------------------------------------------------");
-    	produtorDatos.i1.setDni(null);
+		log.info("Probando grabación de proyecto con nombre nulo ----------------------------------------------------");
+    	produtorDatos.n1.setNombre(null);
     	try {
-        	invDao.almacena(produtorDatos.i1);
+        	proDao.almacena(produtorDatos.n1);
         	excepcion=false;
     	} catch (Exception ex) {
     		excepcion=true;

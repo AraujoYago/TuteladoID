@@ -1,6 +1,8 @@
 package gei.id.tutelado.model;
 
 import javax.persistence.*;
+
+import java.util.Comparator;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -26,7 +28,7 @@ initialValue=0, allocationSize=1)
 })
 
 @Entity
-public class Investigador {
+public class Investigador implements Comparable<Investigador>{
     @Id
     @GeneratedValue (generator="generadorIdsInvestigadores")
     private Long id;
@@ -122,7 +124,7 @@ public class Investigador {
 	
 	// Metodo de conveniencia para asegurarnos de que actualizamos los dos extremos de la asociación al mismo tiempo
 	public void addPublicacion(Publicacion post) {
-		if (post.getInvestigador() != null) throw new RuntimeException ("");
+		if (post.getInvestigador() != null) throw new RuntimeException ("¡Investigador ya asignado!");
 		post.setInvestigador(this);
 		// Es un sorted set, añadimos siempre por el orden de fecha (ascendiente)
 		this.publicaciones.add(post);
@@ -158,5 +160,9 @@ public class Investigador {
 		return "Investigador [id=" + id + ", dni=" + dni + ", nombre=" + nombre + ", apellidos=" + apellidos +  ", telefono=" + telefono + ", ciudad=" + ciudad + ", localidad=" + "]";
 	}
 
-    
+	@Override
+	public int compareTo(Investigador other) {
+		return Comparator.comparing(Investigador::getNombre).thenComparing(Investigador::getApellidos).compare(this, other);
+	}
+	
 }

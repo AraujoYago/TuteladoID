@@ -35,7 +35,7 @@ public abstract class Proyecto {
     @Column(unique=false, nullable = true)
     private LocalDateTime fechaFin;
 
-    @OneToMany (mappedBy="proyecto", fetch=FetchType.LAZY, cascade= {})
+    @OneToMany (mappedBy="proyecto", fetch=FetchType.LAZY, cascade= {CascadeType.PERSIST})
     @OrderBy("apellidos ASC")
     private SortedSet<Investigador> investigadores = new TreeSet<Investigador>();
     
@@ -81,7 +81,7 @@ public abstract class Proyecto {
 	
 	// Metodo de conveniencia para asegurarnos de que actualizamos los dos extremos de la asociación al mismo tiempo
 	public void addInvestigador(Investigador investigador) {
-		if (investigador.getProyecto() != null) throw new RuntimeException ("");
+		if (investigador.getProyecto() != null) throw new RuntimeException ("¡Proyecto ya asignado!");
 		investigador.setProyecto(this);
 		// Es un sorted set, añadimos siempre por el orden de fecha (ascendiente)
 		this.investigadores.add(investigador);
