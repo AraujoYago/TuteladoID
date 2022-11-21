@@ -1,8 +1,9 @@
 package gei.id.tutelado.model;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.SortedSet;
-import java.util.TreeSet;
 
 import javax.persistence.*;
 
@@ -35,9 +36,11 @@ public abstract class Proyecto {
     @Column(unique=false, nullable = true)
     private LocalDateTime fechaFin;
 
-    @OneToMany (mappedBy="proyecto", fetch=FetchType.LAZY, cascade= {CascadeType.PERSIST})
-    @OrderBy("apellidos ASC")
-    private SortedSet<Investigador> investigadores = new TreeSet<Investigador>();
+    @ManyToMany (fetch=FetchType.LAZY, cascade= {CascadeType.PERSIST})
+    @JoinTable(
+    		joinColumns=@JoinColumn(name="idProyecto"),
+    		inverseJoinColumns=@JoinColumn(name="idInvestigador"))
+    private Set<Investigador> investigadores = new HashSet<Investigador>();
     
     public Long getId() {
 		return id;
@@ -55,7 +58,7 @@ public abstract class Proyecto {
 		return fechaFin;
 	}
 
-	public SortedSet<Investigador> getInvestigadores() {
+	public Set<Investigador> getInvestigadores() {
 		return investigadores;
 	}
 
@@ -79,11 +82,7 @@ public abstract class Proyecto {
 		this.investigadores = investigadores;
 	}
 	
-	// Metodo de conveniencia para asegurarnos de que actualizamos los dos extremos de la asociación al mismo tiempo
 	public void addInvestigador(Investigador investigador) {
-		if (investigador.getProyecto() != null) throw new RuntimeException ("¡Proyecto ya asignado!");
-		investigador.setProyecto(this);
-		// Es un sorted set, añadimos siempre por el orden de fecha (ascendiente)
 		this.investigadores.add(investigador);
 	}
 

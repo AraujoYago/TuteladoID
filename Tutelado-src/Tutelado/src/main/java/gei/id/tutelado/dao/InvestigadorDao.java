@@ -5,7 +5,6 @@ import java.util.Map;
 
 import gei.id.tutelado.configuracion.Configuracion;
 import gei.id.tutelado.model.Investigador;
-import gei.id.tutelado.model.Proyecto;
 import gei.id.tutelado.model.Publicacion;
 
 public interface InvestigadorDao {
@@ -23,7 +22,6 @@ public interface InvestigadorDao {
 	
 	// QUERIES ADICIONALES
 	List<Investigador> recuperaTodos();
-	List<Investigador> recuperaTodosProyecto(Proyecto pr);
 	List<Publicacion> recuperaPublicacionesInvestigadorPorDni(String dni); // INNER JOIN
 	List<Investigador> recuperaInvestigadorSinPublicaciones(); // OUTER JOIN
 	Map<String, Integer> recuperaCiudadMasInvestigador(); // SUBCONSULTA

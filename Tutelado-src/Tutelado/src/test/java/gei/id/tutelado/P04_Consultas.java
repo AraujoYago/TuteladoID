@@ -34,7 +34,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class P05_Consultas {
+public class P04_Consultas {
 	
 	private Logger log = LogManager.getLogger("gei.id.tutelado");
 

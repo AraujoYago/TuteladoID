@@ -16,8 +16,6 @@ initialValue=0, allocationSize=1)
 				 query="SELECT i FROM Investigador i where i.dni=:dni"),
 	@NamedQuery (name="Investigador.recuperaTodos",
 				 query="SELECT i FROM Investigador i ORDER BY i.dni"),
-	@NamedQuery (name="Investigador.recuperaTodosProyecto",
-	 			 query="SELECT i FROM Investigador i JOIN i.proyecto pr WHERE pr=:pr ORDER BY i.nombre ASC"),
 	@NamedQuery (name="Investigador.recuperaPublicacionesInvestigadorPorDni",
 	 			 query="SELECT pu FROM Investigador i INNER JOIN i.publicaciones pu WHERE i.dni=:dni"),
 	@NamedQuery (name="Investigador.recuperaInvestigadorSinPublicaciones",
@@ -54,10 +52,6 @@ public class Investigador implements Comparable<Investigador>{
     // NOTA: necesitamos @OrderBy, aún que la colección está definida como LAZY, por si en algún momento accedemos a la propiedad DENTRO de sesión.
     // Garantizamos así que cuando Hibernate cargue la colección, lo haga en la orden adecuada en la consulta que lanza contra la BD
     
-    @ManyToOne (cascade={}, fetch=FetchType.EAGER)
-    @JoinColumn (nullable=true, unique=false)
-    private Proyecto proyecto;
-    
     public Long getId() {
 		return id;
 	}
@@ -84,10 +78,6 @@ public class Investigador implements Comparable<Investigador>{
 
 	public SortedSet<Publicacion> getPublicaciones() {
 		return publicaciones;
-	}
-	
-	public Proyecto getProyecto() {
-		return proyecto;
 	}
 
 	public void setId(Long id) {
@@ -116,10 +106,6 @@ public class Investigador implements Comparable<Investigador>{
 
 	public void setPublicaciones(SortedSet<Publicacion> publicaciones) {
 		this.publicaciones = publicaciones;
-	}
-	
-	public void setProyecto(Proyecto proyecto) {
-		this.proyecto = proyecto;
 	}
 	
 	// Metodo de conveniencia para asegurarnos de que actualizamos los dos extremos de la asociación al mismo tiempo
